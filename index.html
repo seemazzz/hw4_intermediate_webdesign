@@ -1,0 +1,93 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="stmarkdown.css">
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+</head>
+<h1><a href="#home-work-4-for-stata-ii-intermediate-class" id="home-work-4-for-stata-ii-intermediate-class"><p style="text-align: center;"> Home Work 4 for Stata II (Intermediate) Class</p></a></h1>
+<h2><a href="#learning-markdown-and-latex-and-html" id="learning-markdown-and-latex-and-html">Learning Markdown and Latex and html</a></h2>
+<h3><a href="#by-seema-subedi" id="by-seema-subedi">By- Seema Subedi</a></h3>
+<p><strong>1.Background:</strong></p>
+<p>This homework was created in order to help the students practise creating html file (website) that includes background;  method with some codes; results with some graphs and mathematical notations; and conclusion.</p>
+<p>For enhancing the aesthetics of my .html file , I uploaded different files in the github work repository as:</p>
+<p>This is my <a href="https://github.com/seemazzz/hw4_intermediate/blob/main/stmarkdown.css">stmarkdown.css</a> file</p>
+<p>This is my <a href="https://github.com/seemazzz/hw4_intermediate/blob/main/header.txt">header.txt</a> file</p>
+<p><strong>2.Methods:</strong></p>
+<p>First, a variable &ldquo;age&rdquo; was created, once with a normal distribution of ages, and second with the t-distribition of ages, using a simulated data. Then, in a single figure (<u>overlay histogram</u>), those distributions were plotted together to show how different the distributions look visually.</p>
+<p><strong>Codes for generating simulated data, creating variables and making graphs</strong></p>
+<pre><code>.     **Clear all
+.         cls
+
+.         clear all
+
+. 
+.     ** Set working Directory
+.         * See present working directory
+.         pwd 
+
+. 
+.         * Specify to use the present working directory, and specify separately for Window
+&gt; s and Mac
+.         if c(os)==&quot;Windows&quot; { //method for window
+
+.         else { // method for mac 
+
+. 
+.     **Data Simulation:Initialize your dataset with 30 observations
+.         set seed 521774
+
+.         set obs 30
+
+. 
+.     **Variable Generation
+.         *Create an age variable with a mean of 57 years and a standard deviation of 15. 
+.         *Use the command (to simulate a normal distribution)
+.         capture drop age
+
+.         gen age = (rnormal() * 15) + 57
+
+.     
+.         *Alternatively, simulate a t-distribution.
+.         capture drop age_t
+
+.         gen age_t=(rt(_N)*15)+57
+
+.         
+.     ** Graphical Representation
+.         *Plot a histogram of the age variables from both rnormal() and rt(), and overlay 
+&gt; it with a theoretical normal distribution curve. 
+.         *This visualization will help in understanding the distribution of age among the 
+&gt; observations.
+.  
+.         hist age, ///
+&gt;        fcolor(orange%40) /// simulated normal 
+&gt;        addplot(hist age_t, fcolor(midblue%50)) /// agged the curve for simulated t-distri
+&gt; bution 
+&gt;        normal /// theoretical normal, that is showing the normal distribution
+&gt;        legend(on ///
+&gt;           lab(1 &quot;Sampled from Normal&quot;) ///
+&gt;           lab(2 &quot;Theoretical Normal&quot;) ///
+&gt;           lab(3 &quot;Sampled from t-distribution&quot;) ///
+&gt;           )
+
+.   
+.        *Export Graph
+.       graph export histogram.png, replace
+
+.            
+</code></pre>
+<p><strong>3.Results:</strong></p>
+<pre><code>.    quietly 
+
+.    {
+
+   
+</code></pre>
+<p>The results in this analysis are based on simulated data. There are 30 number of observations and 2 variables in the simulated dataset.</p>
+<p><strong>Figure 1:Graph showing different distribution of ages</strong></p>
+<p><img src="Graph.svg" ></p>
+<p><em>$\text{Age(years) in Normal Distribution} \sim \mathcal{N}(\mu=57.14364,,\sigma=16.45974)$</em> <em>$\text{Age(years) in T-distribution} \sim \mathcal{t}(\mu=56.533884,,\sigma=15.009746)$</em></p>
+<p><strong>4.Conclusion:</strong> The histogram clearly shows that though the two distributions had similar mean and SD of age, they have different shapes and tail behaviour. While the normal distribution yields a bell-shaped curve, the t-distribution exhibits slightly heavier tail, which indicates that there is a greater likelihood of extreme age values. It shows the importance of understanding the shape of distribution of variables before implementing further statistical analysis.</p>
